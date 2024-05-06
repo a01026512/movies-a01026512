@@ -2,8 +2,11 @@ import { useEffect, useState } from "react";
 import { useLocation, useParams, useNavigate } from "react-router-dom";
 import { IDetailsResponse, IMovieResponse, getDetailsMovies, getRecommendations } from "../../services";
 import { IMAGE_SOURCE } from "../../constants/moviesMock";
-import { ProgressBar } from "../../components/ProgressBar";
-// import imdbLogo from '../../LogoIMDB.png';
+import { Rating } from "../../components/Rating";
+import imdb from '../../assets/img/LogoIMDb.png';
+import arrow from '../../assets/icons/arrow.svg';
+import heartSolid from '../../assets/icons/heart-solid.svg';
+import heartBorder from '../../assets/icons/heart-border.svg';
 import { MovieCard } from "../../components/MovieCard";
 
 const Show = () => {
@@ -86,58 +89,51 @@ const Show = () => {
     }, [id])
 
     return (
-        <div>
-            <div className="my-4 mx-44 shadow-2xl rounded-3xl bg-blue-100">
-                <div className="p-8">
-                    <div className="flex">
-                        <div className="min-w-[20%] min-h-[20%] max-w-[20%] max-h-[20%]">
-                            <img className="rounded-3xl" src={IMAGE_SOURCE + movie?.poster_path} alt="poster"></img>
-                            <div className="flex mt-2 space-x-2">
-                                <button className="bg-blue-950 text-white rounded-3xl px-4 py-2 flex-1 text-center" onClick={goBack}>
-                                    Ir atras
-                                </button>
-                                {isFavorite ? (
-                                    <button className="bg-yellow-300 text-black rounded-3xl px-4 py-2 flex-1 text-center hover:bg-blue-950 hover:text-white" onClick={removeFavorite}>
-                                        Remove Favorite
-                                    </button>
-                                ) : (
-                                    <button className="bg-blue-950 text-white rounded-3xl px-4 py-2 flex-1 text-center hover:bg-yellow-300 hover:text-black" onClick={addFavorite}>
-                                        Add Favorite
-                                    </button>
-                                )}
-                            </div>
-                        </div>
-                        <div className="flex flex-col min-h-full px-10 justify-between">
-                            <div className="flex flex-col justify-center flex-grow">
-                                <p className="font-bold text-3xl pb-4">{movie?.title} ({movie?.release_date ? new Date(movie.release_date).getFullYear() : 'N/A'})</p>
-                                <p>{movie?.overview}</p>
-                            </div>
-                            <div className="flex justify-center items-center flex-grow">
-                                <a href={`https://www.imdb.com/title/${movie?.imdb_id}`}>
-                                    Logo
-                                </a>
-                            </div>
-                            <div className="flex-grow">
-                                <ProgressBar value={movie?.vote_average ?? 0}></ProgressBar>
-                            </div>
-                        </div>
+        <section className="show">
+            <div className="back-btn">
+                <button type="button" onClick={goBack}>
+                    <img src={arrow} alt="Atras" />
+                </button>
+            </div>
+            <div className="show-card">
+                <div className="left">
+                    <img className="poster" src={IMAGE_SOURCE + movie?.poster_path} alt="poster" width={720} height={1280} />
+                    <div className="links">
+                        <a href={`https://www.imdb.com/title/${movie?.imdb_id}`} target="_blank" className="imbd">
+                            <img src={imdb} alt="IMBd" />
+                        </a>
+                        {isFavorite ? (
+                            <button className="favorite active" onClick={removeFavorite}>
+                                <img src={heartSolid} alt="Remove" />
+                            </button>
+                        ) : (
+                            <button className="favorite" data-favorite={isFavorite} onClick={addFavorite}>
+                                <img src={heartBorder} alt="Add" />
+                            </button>
+                        )}
                     </div>
                 </div>
+                <div className="right">
+                    <h2>{movie?.title} ({movie?.release_date ? new Date(movie.release_date).getFullYear() : 'N/A'})</h2>
+                    <p>{movie?.overview}</p>
+                    <br />
+                    <Rating value={movie?.vote_average ?? 0} />
+                </div>
             </div>
-            <h1 className="flex mx-64 text-3xl justify-center items-center font-bold my-6">Recommended:</h1>
-            <div className="flex flex-row flex-wrap justify-center items-start my-2 mx-40">
+            <h1>Recommended:</h1>
+            <div className="movies-container">
                 {movies.map((movie) => (
-                        <MovieCard
-                            key={movie.id}
-                            movieId={movie.id}
-                            posterPath={movie.poster_path}
-                            title={movie.title}
-                            voteAverage={movie.vote_average}
-                            genreId={movie.genre_ids[0]}
-                        />
-                    ))}
+                    <MovieCard
+                        key={movie.id}
+                        movieId={movie.id}
+                        posterPath={movie.poster_path}
+                        title={movie.title}
+                        voteAverage={movie.vote_average}
+                        genreId={movie.genre_ids[0]}
+                    />
+                ))}
             </div>
-        </div>
+        </section>
     );
 };
 

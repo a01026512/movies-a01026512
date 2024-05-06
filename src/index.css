@@ -52,3 +52,32 @@ body {
   @apply flex flex-row flex-wrap items-start;
   align-content: flex-start; justify-content: flex-start; gap: 2rem;
 }
+
+.back-btn { margin-bottom: 2rem; }
+.back-btn button {  }
+.back-btn button img { width: 1.3rem; height: auto; filter: invert(100%) }
+
+.show-card {
+  @apply flex;
+  flex-direction: row; flex-wrap: nowrap; align-items: flex-start; justify-content: center; margin-bottom: 4rem;
+}
+
+.show-card .left { flex: 1 0 25%; width: 25%; }
+.show-card .left .links {
+  @apply flex;
+  flex-direction: row; flex-wrap: nowrap; justify-content: center; align-items: center;
+}
+.show-card .left .links :is(.imbd, .favorite) { flex: 1 0 50%; width: 50%; text-align: center; display: block; }
+.show-card .left .links .imbd {  }
+.show-card .left .links .favorite { text-align: center; }
+.show-card .left .links .favorite img { display: block; margin: 0 auto; width: 2.2rem; height: auto; filter: invert(100%); transition: 0.2s; }
+.show-card .left .links .favorite:hover img { filter: invert(19%) sepia(74%) saturate(2361%) hue-rotate(96deg) brightness(99%) contrast(102%); }
+.show-card .left .links .favorite.active:hover img { filter: invert(31%) sepia(97%) saturate(7242%) hue-rotate(356deg) brightness(91%) contrast(123%); }
+.show-card .right {
+  @apply flex flex-col min-h-full px-10 justify-between;
+  flex: 1 0 75%; width: 75%;
+}
+.show-card .right h2 {
+  @apply font-bold text-3xl pb-4;
+}
+.show-card .poster { border-radius: .5rem; }

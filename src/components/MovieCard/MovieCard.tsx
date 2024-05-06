@@ -24,7 +24,7 @@ const MovieCard: React.FC<IMovieCard> = ({ title, genreId, movieId, voteAverage,
     }
 
     return (
-        <div className="movie-card " onClick={() => { navigateMovies(movieId,title) }} >
+        <div className="movie-card" onClick={() => { navigateMovies(movieId,title) }} >
             <div className="container">
                 <img src={poster} alt="poster" />
                 <div className="info">
