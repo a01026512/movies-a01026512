@@ -1,0 +1,3 @@
+REACT_APP_MDB_API_KEY=acc2f2add6f2b67652aae2f463412776
+
+https://movies-a01026512.vercel.app
