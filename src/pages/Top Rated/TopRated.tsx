@@ -27,11 +27,10 @@ const TopRated: React.FC = () => {
     }, []);
 
     return (
-        <div>
-            <div className='flex flex-row flex-wrap justify-center items-start m-2'>
-                {loading && <div> Loading... </div>}
-                {errorMovies && <div> Error... </div>}
-                {movies.map((movie, index) => (
+        <section>
+            <h1>Top Rated</h1>
+            <div className='movies-container'>
+                {loading ? <div>Loading...</div> : movies.map((movie, index) => (
                     <MovieCard
                         key={movie.id}
                         movieId={movie.id}
@@ -42,7 +41,7 @@ const TopRated: React.FC = () => {
                     />
                 ))}
             </div>
-        </div>
+        </section>
     );
 };
 

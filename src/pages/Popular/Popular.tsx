@@ -5,7 +5,6 @@ import { MovieCard } from "../../components/MovieCard";
 const Popular: React.FC = () => {
     const [movies, setMovies] = useState<IMovieResponse[]>([]);
     const [loading, setLoading] = useState<boolean>(false);
-    const [errorMovies, setErrorMovies] = useState<boolean>(false);
 
     const getPopular = async () => {
         await getPopularMovies()
@@ -14,8 +13,7 @@ const Popular: React.FC = () => {
                     console.log(res.data, "res");
                     setMovies(res.data.results);
                 }
-            })
-            .catch((err) => {
+            }).catch((err) => {
                 console.log(err, "err");
             });
         setLoading(false);
@@ -27,10 +25,10 @@ const Popular: React.FC = () => {
     }, []);
 
     return (
-        <div className='flex flex-row flex-wrap justify-center items-start m-2'>
-            {loading && <div> Loading... </div>}
-            {errorMovies && <div> Error... </div>}
-                {movies.map((movie, index) => (
+        <section className='popular'>
+            <h1>Popular</h1>
+            <div className="movies-container">
+                {loading ? <div>Loading...</div> : movies.map((movie, index) => (
                     <MovieCard
                         key={movie.id}
                         movieId={movie.id}
@@ -40,7 +38,8 @@ const Popular: React.FC = () => {
                         genreId={movie.genre_ids[0]}
                     />
                 ))}
-        </div>
+            </div>
+        </section>
     );
 };
 

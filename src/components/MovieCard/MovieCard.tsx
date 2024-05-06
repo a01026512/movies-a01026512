@@ -1,19 +1,16 @@
+import { useNavigate } from "react-router-dom";
+
+import { ROUTES } from "../../routes/constants";
 import { IMovieCard } from "./types";
-import { Pill } from "../Pill";
+
 import { IMAGE_SOURCE } from "../../constants/moviesMock";
 import genresData from '../../constants/genres.json';
-import './MovieCard.css'
-import { useNavigate } from "react-router-dom";
-import { number } from "prop-types";
-import { ROUTES } from "../../routes/constants";
 
-const MovieCard: React.FC<IMovieCard> = ({
-    title,
-    genreId,
-    movieId,
-    voteAverage,
-    posterPath
-}) => {
+import { Pill } from "../Pill";
+
+import './MovieCard.css';
+
+const MovieCard: React.FC<IMovieCard> = ({ title, genreId, movieId, voteAverage, posterPath }) => {
     const navigate = useNavigate();
     const poster = IMAGE_SOURCE + posterPath;
 
@@ -27,14 +24,9 @@ const MovieCard: React.FC<IMovieCard> = ({
     }
 
     return (
-        <div
-            className="show-box hover:scale-110"
-            onClick={() => {
-                navigateMovies(movieId,title)
-            }}
-        >
-            <div className="bg-[#2f3238]">
-                <img className="" src={poster} alt="poster"></img>
+        <div className="movie-card " onClick={() => { navigateMovies(movieId,title) }} >
+            <div className="container">
+                <img src={poster} alt="poster" />
                 <div className="info">
                     <div className="text-white pt-[15px] pr-[10px] pb-[15px] pl-[10px] w-[100%] align-middle">
                         <div>

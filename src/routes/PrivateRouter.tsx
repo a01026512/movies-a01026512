@@ -3,9 +3,11 @@ import { Header } from '../components/Header';
 
 const PrivateRouter = () => {
     return (
-        <div className='min-h-screen'>
+        <div className='layout min-h-screen'>
             <Header />
-            <Outlet />
+            <main className='panel'>
+                <Outlet />
+            </main>
         </div>
     );
 };

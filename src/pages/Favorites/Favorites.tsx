@@ -32,19 +32,21 @@ const Favorites = () => {
         runGetFavorites();
     }, [])
     return (
-        <div className="w-screen flex flex-row flex-wrap justify-center items-start m-2">
-            {loading && <div> Loading... </div>}
-            {shows.map((movie: IDetailsResponse) => (
-                                <MovieCard
-                                    key={movie.id}
-                                    movieId={movie.id}
-                                    posterPath={movie.poster_path}
-                                    title={movie.title}
-                                    voteAverage={movie.vote_average}
-                                    genreId={movie.genres[0].id}
-                                />
-                            ))}
-        </div>
+        <section className="favorites">
+            <h1>Favorites</h1>
+            <div className="movies-container">
+                {loading ? <div>Loading...</div> : (shows.length === 0 ? <p>No movies</p> : shows.map((movie: IDetailsResponse) => (
+                    <MovieCard
+                        key={movie.id}
+                        movieId={movie.id}
+                        posterPath={movie.poster_path}
+                        title={movie.title}
+                        voteAverage={movie.vote_average}
+                        genreId={movie.genres[0].id}
+                    />
+                )))}
+            </div>
+        </section>
     );
 }
 

@@ -1,8 +1,16 @@
-.show-box {
-    @apply w-64 bg-white h-auto mt-0 mr-5 mb-8 ml-0 relative shadow-2xl rounded-[7px];
+.movie-card {
+    @apply bg-white h-auto relative shadow-2xl border-0;
+    z-index: 5; flex: 0 1 calc(25% - 1.5rem); width: calc(25% - 1.5rem); cursor: pointer; border-radius: .5rem; transition: 0.5s;
 }
+.movie-card:hover {
+    transform: scale(1.03);
+}
+.movie-card img { border-radius: .5rem }
 
-.info {
-    @apply rounded-[7px] absolute bottom-0 left-0 w-[100%] h-auto justify-center;
-    background: linear-gradient(0deg,#020024 10%,transparent);
+.movie-card .info {
+    @apply opacity-0 rounded-[7px] absolute bottom-0 left-0 w-[100%] h-auto justify-center;
+    transition: 0.5s; background: linear-gradient(0deg,#020024 10%,transparent);
+}
+.movie-card:hover .info {
+    @apply opacity-100;
 }

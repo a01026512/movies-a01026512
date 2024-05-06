@@ -27,11 +27,10 @@ const Upcoming: React.FC = () => {
     }, []);
 
     return (
-        <div>
-             <div className='flex flex-row flex-wrap justify-center items-start m-2'>
-            {loading && <div> Loading... </div>}
-            {errorMovies && <div> Error... </div>}
-                {movies.map((movie, index) => (
+        <section className="upcoming">
+            <h1>Upcoming</h1>
+             <div className='movies-container'>
+                {loading ? <div> Loading... </div> : movies.map((movie, index) => (
                     <MovieCard
                         key={movie.id}
                         movieId={movie.id}
@@ -41,8 +40,8 @@ const Upcoming: React.FC = () => {
                         genreId={movie.genre_ids[0]}
                     />
                 ))}
-        </div>
-        </div>
+            </div>
+        </section>
     );
 };
 
